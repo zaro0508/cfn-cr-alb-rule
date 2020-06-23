@@ -1,29 +1,50 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Hello World lambda
+  ALB rule-making lambda
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Parameters:
+  OidcClientSecretKeyName:
+    Description: 'The name of the key that stores the OAuth 2.0 client secret'
+    Type: String
+  OidcIssuer:
+    Description: 'The OIDC issuer identifier of the identity provider'
+    Type: String
+  OidcAuthorizationEndpoint:
+    Description: 'The authorization endpoint of the identity provider'
+    Type: String
+  OidcTokenEndpoint:
+    Description: 'The token endpoint of the identity provider'
+    Type: String
+  OidcUserInfoEndpoint:
+    Description: 'The user info endpoint of the identity provider'
+    Type: String
+  OidcClientId:
+    Description: 'The OAuth 2.0 client identifier'
+    Type: String
+
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 30
 
 Resources:
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  ALBListenerRuleFunction:
+    Type: AWS::Serverless::Function
     Properties:
-      CodeUri: hello_world/
-      Handler: app.lambda_handler
+      CodeUri: ruler/
+      Handler: app.handler
       Runtime: python3.6
-      Role: !GetAtt FunctionRole.Arn
-      Events:
-        HelloWorld:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /hello
-            Method: get
+      Role: !GetAtt ALBListenerRuleFunctionRole.Arn
+      Environment:
+        Variables:
+          OIDC_CLIENT_SECRET_KEYNAME: !Ref OidcClientSecretKeyName
+          OIDC_ISSUER: !Ref OidcIssuer
+          OIDC_AUTHORIZATION_ENDPOINT: !Ref OidcAuthorizationEndpoint
+          OIDC_TOKEN_ENDPOINT: !Ref OidcTokenEndpoint
+          OIDC_USER_INFO_ENDPOINT: !Ref OidcUserInfoEndpoint
+          OIDC_CLIENT_ID: !Ref OidcClientId
 
-  FunctionRole:   # execute lambda function with this role
+  ALBListenerRuleFunctionRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -37,17 +58,51 @@ Resources:
               - sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - !Ref ALBListenerRuleFunctionPolicy
+        - !Ref SsmManagedPolicy
+        - !ImportValue
+          'Fn::Sub': '${AWS::Region}-sc-kms-key-KmsDecryptPolicyArn'
+
+  ALBListenerRuleFunctionPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DoElbStuff
+            Effect: 'Allow'
+            Action:
+              - 'elasticloadbalancing:*'
+            Resource: '*'
+
+  SsmManagedPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: GetParamAccess
+            Action:
+              - 'ssm:*'
+            Effect: Allow
+            Resource: !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${OidcClientSecretKeyName}'
 
 Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  HelloWorldApi:
-    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunctionArn:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionRoleArn:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt FunctionRole.Arn
+  ALBListenerRuleFunctionName:
+    Value: !Ref ALBListenerRuleFunction
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-FunctionName'
+  ALBListenerRuleFunctionArn:
+    Value: !GetAtt ALBListenerRuleFunction.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-FunctionArn'
+  ALBListenerRuleFunctionRole:
+    Description: 'Role reference for the Ruler lambda'
+    Value: !Ref ALBListenerRuleFunctionRole
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ALBListenerRuleFunctionRole'
+  ALBListenerRuleFunctionRoleArn:
+    Description: 'Role ARN for the Ruler lambda'
+    Value: !GetAtt ALBListenerRuleFunctionRole.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ALBListenerRuleFunctionRoleArn'
