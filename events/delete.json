@@ -1,0 +1,16 @@
+{
+    "RequestType": "Delete",
+    "ServiceToken": "arn:aws:lambda:us-east-1:465877038949:function:cfn-cr-alb-rule-ALBListenerRuleFunction-1C3SJ7M6AJ61D",
+    "ResponseURL": "https://cloudformation-custom-resource-response-useast1.s3.amazonaws.com/arn%3Aaws%3Acloudformation%3Aus-east-1%3A465877038949%3Astack/SC-465877038949-pp-4c53pjs57pjnm/6f97d2f0-bbbf-11ea-8342-0ece9c9311f7%7CAlbListenerRule%7C064c3c2e-699c-47c0-8b6c-0f29ce6d2686?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200701T184721Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIA6L7Q4OWTQNWWOUNT%2F20200701%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=20c09e67b31d8ba41c9898d47e30bb7a1e71c483990cdf57b8501b8a3ba57b6f",
+    "StackId": "arn:aws:cloudformation:us-east-1:465877038949:stack/SC-465877038949-pp-4c53pjs57pjnm/6f97d2f0-bbbf-11ea-8342-0ece9c9311f7",
+    "RequestId": "064c3c2e-699c-47c0-8b6c-0f29ce6d2686",
+    "LogicalResourceId": "AlbListenerRule",
+    "PhysicalResourceId": "SC-465877038949-pp-4c53pjs57pjnm-AlbListenerRule-1E6AB6MNZU7N1",
+    "ResourceType": "Custom::ALBListenerRule",
+    "ResourceProperties": {
+        "ServiceToken": "arn:aws:lambda:us-east-1:465877038949:function:cfn-cr-alb-rule-ALBListenerRuleFunction-1C3SJ7M6AJ61D",
+        "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:465877038949:targetgroup/TargetGroup-i-0e4e5dc5e00f75be8/57a24e860fd06795",
+        "ListenerArn": "arn:aws:elasticloadbalancing:us-east-1:465877038949:listener/app/sc135-poc/bf54cc972d64237b/8ad4c71091181c60",
+        "InstanceId": "i-0e4e5dc5e00f75be8"
+    }
+}

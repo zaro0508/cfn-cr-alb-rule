@@ -1,0 +1,15 @@
+{
+    "RequestType": "Create",
+    "ServiceToken": "arn:aws:lambda:us-east-1:465877038949:function:cfn-cr-alb-rule-ALBListenerRuleFunction-1C3SJ7M6AJ61D",
+    "ResponseURL": "https://cloudformation-custom-resource-response-useast1.s3.amazonaws.com/arn%3Aaws%3Acloudformation%3Aus-east-1%3A465877038949%3Astack/SC-465877038949-pp-vnf634wxxni4m/2cf36d00-bbca-11ea-bf7f-0ad23187ddb2%7CAlbListenerRule%7Ce037f99d-6656-48a6-89fa-4a03244b3332?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200701T184217Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Credential=AKIA6L7Q4OWTQNWWOUNT%2F20200701%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=8b50f42fbdb29bd08812209ad230bb973aaa69d13c30196ca08500d5810986d4",
+    "StackId": "arn:aws:cloudformation:us-east-1:465877038949:stack/SC-465877038949-pp-vnf634wxxni4m/2cf36d00-bbca-11ea-bf7f-0ad23187ddb2",
+    "RequestId": "e037f99d-6656-48a6-89fa-4a03244b3332",
+    "LogicalResourceId": "AlbListenerRule",
+    "ResourceType": "Custom::ALBListenerRule",
+    "ResourceProperties": {
+        "ServiceToken": "arn:aws:lambda:us-east-1:465877038949:function:cfn-cr-alb-rule-ALBListenerRuleFunction-1C3SJ7M6AJ61D",
+        "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:465877038949:targetgroup/TargetGroup-i-049f8b7f35ef87673/32ee340e330ca6e2",
+        "ListenerArn": "arn:aws:elasticloadbalancing:us-east-1:465877038949:listener/app/sc135-poc/bf54cc972d64237b/8ad4c71091181c60",
+        "InstanceId": "i-049f8b7f35ef87673"
+    }
+}
