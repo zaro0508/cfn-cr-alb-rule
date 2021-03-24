@@ -137,7 +137,7 @@ def create(event, context):
             "UserInfoEndpoint": oidc_user_info_endpoint,
             "ClientId": oidc_client_id,
             "ClientSecret": client_secret,
-            "Scope": ["openid", "view", "download", "modify"],
+            "Scope": "openid view download modify",
             "AuthenticationRequestExtraParams": {
               "claims": "{\"id_token\":{\"userid\":{\"essential\":true}},\"userinfo\":{\"userid\":{\"essential\":true}}}"
             },
