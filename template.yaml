@@ -33,7 +33,7 @@ Resources:
     Properties:
       CodeUri: ruler/
       Handler: app.handler
-      Runtime: python3.6
+      Runtime: python3.8
       Role: !GetAtt ALBListenerRuleFunctionRole.Arn
       Environment:
         Variables:
