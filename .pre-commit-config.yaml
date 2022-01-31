@@ -1,6 +1,6 @@
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.1.0
+    rev: v4.1.0
     hooks:
         # On Windows, git will convert all CRLF to LF,
         # but only after all hooks are done executing.
@@ -13,15 +13,15 @@ repos:
     -   id: trailing-whitespace
     -   id: check-ast
 -   repo: https://github.com/adrienverge/yamllint
-    rev: v1.23.0
+    rev: v1.26.3
     hooks:
     -   id: yamllint
 -   repo: https://github.com/awslabs/cfn-python-lint
-    rev: v0.33.2
+    rev: v0.58.0
     hooks:
     -   id: cfn-python-lint
         files: template\.(json|yml|yaml)$
 -   repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.1.7
+    rev: v1.1.11
     hooks:
     -   id: remove-tabs
