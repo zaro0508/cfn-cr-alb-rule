@@ -6,9 +6,6 @@ verify_ssl = true
 [dev-packages]
 pytest = "~=6.0"
 requests-mock = "~=1.8"
-pre-commit = "~=2.7"
-aws-sam-cli = "~=1.37"
-awscli = "~=1.22"
 typing-extensions = "~=3.10"
 
 [packages]
