@@ -24,6 +24,7 @@ class TestNextPriority(unittest.TestCase):
   }
 
 
+  @patch.dict('os.environ', {'AWS_DEFAULT_REGION': 'test-region'})
   def test_next_priority_empty_rules(self):
     elbv2 = boto3.client('elbv2')
     with Stubber(elbv2) as stubber:
@@ -34,6 +35,7 @@ class TestNextPriority(unittest.TestCase):
       self.assertEqual(result, expected)
 
 
+  @patch.dict('os.environ', {'AWS_DEFAULT_REGION': 'test-region'})
   def test_next_priority_not_empty_rules(self):
     elbv2 = boto3.client('elbv2')
     with Stubber(elbv2) as stubber:
@@ -44,6 +46,7 @@ class TestNextPriority(unittest.TestCase):
       self.assertEqual(result, expected)
 
 
+  @patch.dict('os.environ', {'AWS_DEFAULT_REGION': 'test-region'})
   def test_next_priority_client_error(self):
     elbv2 = boto3.client('elbv2')
     with Stubber(elbv2) as stubber, self.assertRaises(Exception) as context_manager:

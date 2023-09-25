@@ -25,6 +25,7 @@ class TestGetClientKey(unittest.TestCase):
   }
 
 
+  @patch.dict('os.environ', {'AWS_DEFAULT_REGION': 'test-region'})
   def test_get_client_key(self):
     ssm = boto3.client('ssm')
     with Stubber(ssm) as stubber:
@@ -35,6 +36,7 @@ class TestGetClientKey(unittest.TestCase):
       self.assertEqual(result, test_key_name)
 
 
+  @patch.dict('os.environ', {'AWS_DEFAULT_REGION': 'test-region'})
   def test_get_client_key_missing(self):
     ssm = boto3.client('ssm')
     with Stubber(ssm) as stubber, self.assertRaises(Exception) as context_manager:

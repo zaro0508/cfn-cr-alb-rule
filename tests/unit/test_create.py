@@ -28,6 +28,7 @@ class TestCreate(unittest.TestCase):
   ]
 
 
+  @patch.dict('os.environ', {'AWS_DEFAULT_REGION': 'test-region'})
   @patch('ruler.app.get_properties', MagicMock(return_value=mock_properties))
   @patch('ruler.app.get_envvars', MagicMock(return_value=mock_envvars))
   @patch('ruler.app.get_client_key', MagicMock(return_value='not-the-real-key'))
@@ -42,6 +43,7 @@ class TestCreate(unittest.TestCase):
       self.assertEqual(result, expected_rule_arn)
 
 
+  @patch.dict('os.environ', {'AWS_DEFAULT_REGION': 'test-region'})
   @patch('ruler.app.get_properties', MagicMock(return_value=mock_properties))
   @patch('ruler.app.get_envvars', MagicMock(return_value=mock_envvars))
   @patch('ruler.app.get_client_key', MagicMock(return_value='not-the-real-key'))
