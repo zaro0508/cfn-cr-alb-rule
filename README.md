@@ -174,7 +174,9 @@ changing the parameters to match the values for your OIDC client.
 
 config/prod/cfn-cr-alb-rule.yaml
 ```yaml
-template_path: "remote/cfn-cr-alb-rule.yaml"
+template:
+  type: "http"
+  url: "https://s3.amazonaws.com/bootstrap-awss3cloudformationbucket-19qromfd235z9/cfn-cr-alb-rule/master/cfn-cr-alb-rule.yaml"
 stack_name: "cfn-cr-alb-rule"
 parameters:
   OidcClientSecretKeyName: '/alb-notebook-access/AuthenticateOidcClientSecret'
@@ -183,9 +185,7 @@ parameters:
   OidcTokenEndpoint: 'https://qtg2zn2bbf.execute-api.us-east-1.amazonaws.com/token'
   OidcUserInfoEndpoint: 'https://repo-prod.prod.sagebase.org/auth/v1/oauth2/userinfo'
   OidcClientId: '100050'
-hooks:
-  before_launch:
-    - !cmd "curl https://s3.amazonaws.com/bootstrap-awss3cloudformationbucket-19qromfd235z9/cfn-cr-alb-rule/master/cfn-cr-alb-rule.yaml --create-dirs -o templates/remote/cfn-cr-alb-rule.yaml"
+  KmsDecryptPolicyArn: !stack_output_external sc-kms-key::KmsDecryptPolicyArn
 ```
 
 Install the lambda using sceptre:
