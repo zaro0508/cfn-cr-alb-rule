@@ -22,6 +22,9 @@ Parameters:
   OidcClientId:
     Description: 'The OAuth 2.0 client identifier'
     Type: String
+  KmsDecryptPolicyArn:
+    Description: 'The ARN of the KMS decryption policy'
+    Type: String
 
 Globals:
   Function:
@@ -60,8 +63,7 @@ Resources:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
         - !Ref ALBListenerRuleFunctionPolicy
         - !Ref SsmManagedPolicy
-        - !ImportValue
-          'Fn::Sub': '${AWS::Region}-sc-kms-key-KmsDecryptPolicyArn'
+        - !Ref KmsDecryptPolicyArn
 
   ALBListenerRuleFunctionPolicy:
     Type: AWS::IAM::ManagedPolicy
