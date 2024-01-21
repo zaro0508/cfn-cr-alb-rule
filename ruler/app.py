@@ -141,7 +141,8 @@ def create(event, context):
             "AuthenticationRequestExtraParams": {
               "claims": "{\"id_token\":{\"userid\":{\"essential\":true}},\"userinfo\":{\"userid\":{\"essential\":true}}}"
             },
-            "OnUnauthenticatedRequest": "authenticate"
+            "OnUnauthenticatedRequest": "authenticate",
+            "SessionTimeout": 3600
           },
           "Order": 1
         },
