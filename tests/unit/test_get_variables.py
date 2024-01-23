@@ -40,7 +40,8 @@ class TestGetVariables(unittest.TestCase):
     'OIDC_AUTHORIZATION_ENDPOINT',
     'OIDC_TOKEN_ENDPOINT',
     'OIDC_USER_INFO_ENDPOINT',
-    'OIDC_CLIENT_ID'
+    'OIDC_CLIENT_ID',
+    'OIDC_SESSION_TIMEOUT'
     ]
 
     vals = list(range(len(env_var_names)))
