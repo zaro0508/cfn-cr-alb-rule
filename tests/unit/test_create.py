@@ -24,7 +24,8 @@ class TestCreate(unittest.TestCase):
     'auth-endpoint',
     'token-endpoint',
     'user-info-endpoint',
-    'client-id'
+    'client-id',
+    3600
   ]
 
 

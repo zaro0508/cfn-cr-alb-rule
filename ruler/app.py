@@ -48,7 +48,8 @@ def get_envvars():
     'OIDC_AUTHORIZATION_ENDPOINT',
     'OIDC_TOKEN_ENDPOINT',
     'OIDC_USER_INFO_ENDPOINT',
-    'OIDC_CLIENT_ID'
+    'OIDC_CLIENT_ID',
+    'OIDC_SESSION_TIMEOUT'
   ]
   return get_variables(os.getenv, env_var_names, MISSING_ENVIRONMENT_VARIABLE_MESSAGE)
 
@@ -105,7 +106,7 @@ def create(event, context):
 
   # get variables from lambda properties and environment
   instance_id, target_group_arn, listener_arn = get_properties(event)
-  oidc_client_secret_key_name, oidc_issuer, oidc_auth_endpoint, oidc_token_endpoint, oidc_user_info_endpoint, oidc_client_id  = get_envvars()
+  oidc_client_secret_key_name, oidc_issuer, oidc_auth_endpoint, oidc_token_endpoint, oidc_user_info_endpoint, oidc_client_id, session_timeout  = get_envvars()
 
   # get oidc client secret from ssm
   client_secret = get_client_key(oidc_client_secret_key_name)
@@ -141,7 +142,8 @@ def create(event, context):
             "AuthenticationRequestExtraParams": {
               "claims": "{\"id_token\":{\"userid\":{\"essential\":true}},\"userinfo\":{\"userid\":{\"essential\":true}}}"
             },
-            "OnUnauthenticatedRequest": "authenticate"
+            "OnUnauthenticatedRequest": "authenticate",
+            "SessionTimeout": session_timeout
           },
           "Order": 1
         },
