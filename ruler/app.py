@@ -49,7 +49,7 @@ def get_envvars():
     'OIDC_TOKEN_ENDPOINT',
     'OIDC_USER_INFO_ENDPOINT',
     'OIDC_CLIENT_ID',
-    'OIDC_SESSION_TIMEOUT'
+    'SESSION_TIMEOUT'
   ]
   return get_variables(os.getenv, env_var_names, MISSING_ENVIRONMENT_VARIABLE_MESSAGE)
 
