@@ -143,7 +143,7 @@ def create(event, context):
               "claims": "{\"id_token\":{\"userid\":{\"essential\":true}},\"userinfo\":{\"userid\":{\"essential\":true}}}"
             },
             "OnUnauthenticatedRequest": "authenticate",
-            "SessionTimeout": session_timeout
+            "SessionTimeout": int(session_timeout)
           },
           "Order": 1
         },

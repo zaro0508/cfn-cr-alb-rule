@@ -26,7 +26,7 @@ Parameters:
     Description: 'The ARN of the KMS decryption policy'
     Type: String
   SessionTimeout:
-    Description: 'The duration for which an access token is kept before retrieving a new one'
+    Description: 'The duration (in seconds) for which an access token is kept before retrieving a new one'
     Type: Number
     Default: 3600
 
