@@ -107,7 +107,7 @@ def create(event, context):
 
   # get variables from lambda properties and environment
   instance_id, target_group_arn, listener_arn = get_properties(event)
-  oidc_client_secret_key_name, oidc_issuer, oidc_auth_endpoint, oidc_token_endpoint,
+  oidc_client_secret_key_name, oidc_issuer, oidc_auth_endpoint, oidc_token_endpoint, \
   oidc_user_info_endpoint, oidc_client_id, session_cookie_name, session_timeout  = get_envvars()
 
   # get oidc client secret from ssm
