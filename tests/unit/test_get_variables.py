@@ -41,7 +41,7 @@ class TestGetVariables(unittest.TestCase):
     'OIDC_TOKEN_ENDPOINT',
     'OIDC_USER_INFO_ENDPOINT',
     'OIDC_CLIENT_ID',
-    'SESSION_COOKIE_NAME',
+    'SESSION_COOKIE_NAME_PREFIX',
     'SESSION_TIMEOUT'
     ]
 
