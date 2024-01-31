@@ -185,6 +185,7 @@ parameters:
   OidcTokenEndpoint: 'https://qtg2zn2bbf.execute-api.us-east-1.amazonaws.com/token'
   OidcUserInfoEndpoint: 'https://repo-prod.prod.sagebase.org/auth/v1/oauth2/userinfo'
   OidcClientId: '100050'
+  SessionCookieNamePrefix: 'AWSELBAuthSessionCookie'
   SessionTimeout: 3600
   KmsDecryptPolicyArn: !stack_output_external sc-kms-key::KmsDecryptPolicyArn
 ```
