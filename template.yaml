@@ -25,13 +25,13 @@ Parameters:
   KmsDecryptPolicyArn:
     Description: 'The ARN of the KMS decryption policy'
     Type: String
-  SessionCookieName:
-    Description: 'The name of the cookie storing the user authentication information'
+  SessionCookieNamePrefix:
+    Description: 'The prefix of the name of the cookie storing the user authentication information'
     Type: String
   SessionTimeout:
     Description: 'The duration (in seconds) for which an access token is kept before retrieving a new one'
     Type: Number
-    Default: 3600
+    Default: 86400
 
 Globals:
   Function:
@@ -53,7 +53,7 @@ Resources:
           OIDC_TOKEN_ENDPOINT: !Ref OidcTokenEndpoint
           OIDC_USER_INFO_ENDPOINT: !Ref OidcUserInfoEndpoint
           OIDC_CLIENT_ID: !Ref OidcClientId
-          SESSION_COOKIE_NAME: !Ref SessionCookieName
+          SESSION_COOKIE_NAME_PREFIX: !Ref SessionCookieNamePrefix
           SESSION_TIMEOUT: !Ref SessionTimeout
 
   ALBListenerRuleFunctionRole:
